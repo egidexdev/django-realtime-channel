@@ -1,0 +1,27 @@
+{% if message.author == user %}
+<!-- Outgoing message -->
+<li class="flex flex-col items-end mb-4">
+    <div class="bg-green-200 rounded-l-lg rounded-tr-lg p-4 max-w-[75%]">
+        <span>{{ message.body }}</span>
+    </div>
+    <div class="text-sm font-light text-gray-300 mt-1">
+        You
+    </div>
+</li>
+{% else %}
+<!-- Incoming message -->
+<li class="flex flex-col items-start mb-4">
+    <div class="flex items-center gap-2">
+        <a href="{% url 'profile' message.author.username %}">
+            <img class="w-8 h-8 rounded-full object-cover" src="{{ message.author.profile.avatar }}">
+        </a>
+        <div class="bg-white p-4 max-w-[75%] rounded-r-lg rounded-tl-lg">
+            <span>{{ message.body }}</span>
+        </div>
+    </div>
+    <div class="text-sm font-light text-gray-400 mt-1 ml-10">
+        <span class="text-white">{{ message.author.profile.name }}</span>
+        <span>@{{ message.author.username }}</span>
+    </div>
+</li>
+{% endif %}
